@@ -20,7 +20,7 @@ class App extends Component {
     }
 
     fetchStudents() {
-        fetch("http://localhost:3001/student")
+        fetch("http://18.224.60.213:3001/student")
             .then(response => response.json())
             .then(data => {
                 console.table(data);
@@ -33,7 +33,7 @@ class App extends Component {
 
     addStudent(student) {
         console.log("Add student called from parent")
-        fetch(`http://localhost:3001/student`, {
+        fetch(`http://18.224.60.213:3001/student`, {
             method: "POST",
             headers: {
                 'Content-Type': 'application/json'
@@ -56,7 +56,7 @@ class App extends Component {
 
     editStudent(student) {
         console.log("Esit student called from parent")
-        fetch(`http://localhost:3001/student/${student._id}`, {
+        fetch(`http://18.224.60.213:3001/student/${student._id}`, {
             method: "PATCH",
             headers: {
                 'Content-Type': 'application/json'
@@ -75,7 +75,7 @@ class App extends Component {
 
     deleteStudent(student) {
         console.log("Delete student called from parent")
-        fetch(`http://localhost:3001/student/${student._id}`, {
+        fetch(`http://18.224.60.213:3001/student/${student._id}`, {
             method: "DELETE",
             headers: {
                 'Content-Type': 'application/json'
