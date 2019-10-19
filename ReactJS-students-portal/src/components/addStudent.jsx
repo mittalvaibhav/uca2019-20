@@ -9,27 +9,29 @@ class AddStudent extends Component {
     constructor() {
         super();
         console.info("Add student constructor called");
-    }
+        this.name = "";
+        this.gpa = "";
+        this.email = "";
 
-    handleNameChange = (event) => {
-        this.setState({ name: event.target.value })
-        console.log(`Curent state while typing: ${this.state}`)
     }
 
     handleGPAChange = (event) => {
         this.setState({ gpa: event.target.value })
-        console.log(`Curent state while typing: ${this.state}`)
     }
 
     handleEMailChange = (event) => {
         this.setState({ email: event.target.value })
-        console.log(`Curent state while typing: ${this.state}`)
     }
 
     addStudent = (event) => {
         event.preventDefault();
-        console.log(`The new student is: ${JSON.stringify(this.state)}`)
-        this.props.addStudent(this.state);
+        this.name = this.refs.name.value;
+        /* Here since the setState ie triggered by reactJS event handler onSubmit and not the default one,
+        so the setState is Asynchronous */
+        this.setState({ name: this.name })
+        setTimeout(() => {
+            this.props.addStudent(this.state);
+        })
     }
 
     render() {
@@ -39,7 +41,7 @@ class AddStudent extends Component {
                     <div className="form-row">
                         <div className="form-group col-md-8">
                             <label>Name</label>
-                            <input type="text" value={this.state.name} className="form-control" placeholder="Name" onChange={this.handleNameChange} />
+                            <input type="text" ref="name" className="form-control" placeholder="Name" />
                         </div>
                     </div>
                     <div className="form-row">
