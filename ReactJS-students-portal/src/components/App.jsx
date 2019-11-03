@@ -11,8 +11,7 @@ class App extends Component {
         studentList: []
     }
     constructor() {
-        super()
-        // TODO 
+        super();
     }
 
     componentDidMount() {
