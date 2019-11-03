@@ -1,0 +1,22 @@
+{
+  "bookList": [
+    {
+      "name": "N1",
+      "author": "A1",
+      "version": "1.2",
+      "id": 5
+    },
+    {
+      "id": 6,
+      "name": "N2UP",
+      "author": "A2UP",
+      "version": "1.2"
+    },
+    {
+      "name": "N3",
+      "author": "A3",
+      "version": "1.2",
+      "id": 7
+    }
+  ]
+}

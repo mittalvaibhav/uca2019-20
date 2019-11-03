@@ -8,17 +8,19 @@ class Navbar extends Component {
             <div className="row">
                 <div className="col">
                     <nav className="navbar navbar-expand-lg navbar-light bg-light">
-                        <a className="navbar-brand"><Link to='/'>Home</Link></a>
+                        <div className="navbar-brand">
+                            <Link to='/'>Home</Link>
+                        </div>
                         <div className="navbar-nav">
                             <Link to='/add'>Add Book</Link>
                         </div>
 
-                        <div>
+                        <div className="navbar-text ml-5 pl-5">
                             <i>Welcome to college library</i>
                         </div>
                     </nav>
                 </div>
-            </div>
+            </div >
         )
     }
 }
