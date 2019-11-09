@@ -5,32 +5,34 @@ import EditBook from './editBook';
 import AddBook from './addBook';
 import { BrowserRouter as Router, Route } from 'react-router-dom';
 import "./../index.css";
+import Footer from './footer';
 
 class MainPage extends Component {
     constructor() {
         super()
         console.log("Constructor is called");
         this.selectedPhoto = null;
+        this.state = {
+            bookList: []
+        }
+        this.name = "Chitkara University"
     }
 
     componentDidMount() {
         console.log("mainpage Component is mounted");
     }
 
-    state = {
-        bookList: []
-    }
-
     render() {
         return (
             <div>
                 <Router>
-                    <Navbar />
+                    <Navbar name={this.name} />
                     <div className="col-md-8">
                         <Route exact path="/" render={(props) => <RecentBooksList bookList={this.state.bookList} sendSelectedBook={this.selectBook} deleteBook={this.deleteBook} fetchBooksList={this.fetchBooksList} />} />
                         <Route path="/add" render={(props) => <AddBook addBook={this.addBook} />} />
                         <Route path="/edit" render={(props) => <EditBook book={this.state.selectedBookForEdit} editBook={this.editBook} />} />
                     </div>
+                    <Footer name={this.name} />
                 </Router>
             </div>
         )
@@ -45,6 +47,9 @@ class MainPage extends Component {
                 console.log(res);
                 this.setState({ bookList: res });
                 console.log(this.state.bookList)
+            })
+            .catch(res => {
+                console.log(`The error is : ${JSON.stringify(res)}`)
             })
     }
 

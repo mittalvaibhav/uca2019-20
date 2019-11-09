@@ -7,17 +7,19 @@ class RecentBooksList extends Component {
 
     constructor(props) {
         super(props);
-        console.log(this.props);
         this.componentName = "RecentBooksList"
     }
 
     componentDidMount() {
-        console.log(`${this.componentName}: Fetch list of Books`);
         this.props.fetchBooksList();
     }
 
     componentDidUpdate() {
-        console.log("recent Books Component is updated");
+        console.log("Recent Books List Component is updated");
+    }
+
+    componentWillUnmount() {
+        console.log("Recent Books List Component will unmount now");
     }
 
     render() {
