@@ -3,7 +3,8 @@ import Navbar from './navbar';
 import RecentBooksList from './recentBooksList'
 import EditBook from './editBook';
 import AddBook from './addBook';
-import { BrowserRouter as Router, Route } from 'react-router-dom';
+import NotFound from './notFound';
+import { BrowserRouter as Router, Route, Switch } from 'react-router-dom';
 import "./../index.css";
 import Footer from './footer';
 
@@ -30,9 +31,12 @@ class MainPage extends Component {
                 <Router>
                     <Navbar name={this.name} />
                     <div className="col-md-8 offset-md-2">
-                        <Route exact path="/" render={(props) => <RecentBooksList bookList={this.state.bookList} sendSelectedBook={this.selectBook} deleteBook={this.deleteBook} fetchBooksList={this.fetchBooksList} />} />
-                        <Route path="/add" render={(props) => <AddBook {...props} test="test" />} />
-                        <Route path="/edit" render={(props) => <EditBook book={this.state.selectedBookForEdit} editBook={this.editBook} />} />
+                        <Switch>
+                            <Route exact path="/" render={(props) => <RecentBooksList bookList={this.state.bookList} sendSelectedBook={this.selectBook} deleteBook={this.deleteBook} fetchBooksList={this.fetchBooksList} />} />
+                            <Route path="/add" render={(props) => <AddBook {...props} test="test" />} />
+                            <Route path="/edit" render={(props) => <EditBook book={this.state.selectedBookForEdit} editBook={this.editBook} />} />
+                            <Route render={(props) => <NotFound />} />
+                        </Switch>
                     </div>
                     <Footer name={this.name} />
                 </Router>
