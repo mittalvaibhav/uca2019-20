@@ -1,5 +1,7 @@
 import React, { Component } from 'react';
 import { Redirect } from 'react-router-dom'
+import './../index.css';
+
 class AddBook extends Component {
     constructor(props) {
         super(props);
@@ -23,6 +25,10 @@ class AddBook extends Component {
 
     handleVersionChange = (event) => {
         this.setState({ book: { ...this.state.book, version: event.target.value } })
+    }
+
+    handleImageChange = (event) => {
+        console.log(`The files are : ${event.target.files[0]}`)
     }
 
     render() {

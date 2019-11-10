@@ -4,9 +4,11 @@ import RecentBooksList from './recentBooksList'
 import EditBook from './editBook';
 import AddBook from './addBook';
 import NotFound from './notFound';
-import { BrowserRouter as Router, Route, Switch } from 'react-router-dom';
+import { BrowserRouter as Router, Route, Switch, Redirect } from 'react-router-dom';
 import "./../index.css";
 import Footer from './footer';
+import Protected from './Protected';
+import UnProtected from './UnProtected';
 
 class MainPage extends Component {
     constructor() {
@@ -14,7 +16,8 @@ class MainPage extends Component {
         console.log("Constructor is called");
         this.selectedPhoto = null;
         this.state = {
-            bookList: []
+            bookList: [],
+            authenticated: false
         }
         this.name = "Chitkara University"
     }
@@ -29,12 +32,13 @@ class MainPage extends Component {
         return (
             <div>
                 <Router>
-                    <Navbar name={this.name} />
+                    <Navbar name={this.name} authenticated={this.state.authenticated} />
                     <div className="col-md-8 offset-md-2">
                         <Switch>
                             <Route exact path="/" render={(props) => <RecentBooksList bookList={this.state.bookList} sendSelectedBook={this.selectBook} deleteBook={this.deleteBook} fetchBooksList={this.fetchBooksList} />} />
                             <Route path="/add" render={(props) => <AddBook {...props} test="test" />} />
                             <Route path="/edit" render={(props) => <EditBook book={this.state.selectedBookForEdit} editBook={this.editBook} />} />
+                            <Route path="/protected" render={(props) => this.state.authenticated ? <Protected /> : <Redirect to='/' />} />
                             <Route render={(props) => <NotFound />} />
                         </Switch>
                     </div>
