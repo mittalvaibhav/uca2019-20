@@ -23,13 +23,15 @@ class MainPage extends Component {
     }
 
     render() {
+        console.log("Mainpage Component is rendered");
+
         return (
             <div>
                 <Router>
                     <Navbar name={this.name} />
-                    <div className="col-md-8">
+                    <div className="col-md-8 offset-md-2">
                         <Route exact path="/" render={(props) => <RecentBooksList bookList={this.state.bookList} sendSelectedBook={this.selectBook} deleteBook={this.deleteBook} fetchBooksList={this.fetchBooksList} />} />
-                        <Route path="/add" render={(props) => <AddBook addBook={this.addBook} />} />
+                        <Route path="/add" render={(props) => <AddBook {...props} test="test" />} />
                         <Route path="/edit" render={(props) => <EditBook book={this.state.selectedBookForEdit} editBook={this.editBook} />} />
                     </div>
                     <Footer name={this.name} />
@@ -55,25 +57,6 @@ class MainPage extends Component {
 
     selectBook = (book) => {
         this.setState({ selectedBookForEdit: book });
-    }
-
-    addBook = (newBook) => {
-        console.log("The nely added book is: ", newBook)
-        fetch('http://localhost:3000/bookList', {
-            method: "POST",
-            headers: {
-                "Content-Type": "application/json",
-            },
-            body: JSON.stringify(newBook)
-        })
-            .then(res => {
-                if (res.ok) {
-                    return res.json();
-                }
-            })
-            .then(res => {
-                alert(`New book: ${JSON.stringify(res)} added successfully`);
-            })
     }
 
     editBook = (book) => {

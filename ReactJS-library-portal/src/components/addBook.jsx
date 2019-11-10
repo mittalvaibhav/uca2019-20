@@ -1,38 +1,35 @@
 import React, { Component } from 'react';
-
+import { Redirect } from 'react-router-dom'
 class AddBook extends Component {
-    state = {
-        name: '',
-        author: '',
-        version: ''
-    }
-    constructor() {
-        super();
+    constructor(props) {
+        super(props);
         this.name = "";
         this.author = "";
         this.version = "";
+        this.state = {
+            book: {
+                name: '',
+                author: '',
+                version: '',
+            },
+            redirectToHome: false
+        }
+        console.log("Component: Add book component ", "Method: constructor ", `props: ${JSON.stringify(this.props)}`);
     }
 
     handleAuthorChange = (event) => {
-        this.setState({ author: event.target.value })
+        this.setState({ book: { ...this.state.book, author: event.target.value } })
     }
 
     handleVersionChange = (event) => {
-        this.setState({ version: event.target.value })
-    }
-
-    addBook = (event) => {
-        event.preventDefault();
-        this.name = this.refs.name.value;
-        /* Here since the setState ie triggered by reactJS event handler onSubmit and not the default one,
-        so the setState is Asynchronous */
-        this.setState({ name: this.name })
-        setTimeout(() => {
-            this.props.addBook(this.state);
-        })
+        this.setState({ book: { ...this.state.book, version: event.target.value } })
     }
 
     render() {
+        if (this.state.redirectToHome) {
+            return <Redirect to='/' />
+        }
+
         return (
             <div className="container">
                 <form onSubmit={this.addBook}>
@@ -58,6 +55,33 @@ class AddBook extends Component {
                 </form>
             </div>
         )
+    }
+
+    addBook = (event) => {
+        event.preventDefault();
+        this.name = this.refs.name.value;
+        /* Here since the setState ie triggered by reactJS event handler onSubmit and not the default one,
+        so the setState is Asynchronous */
+        this.setState({ book: { ...this.state.book, name: this.name } })
+        setTimeout(() => {
+            fetch('http://localhost:3000/bookList', {
+                method: "POST",
+                headers: {
+                    "Content-Type": "application/json",
+                },
+                body: JSON.stringify(this.state.book)
+            })
+                .then(res => {
+                    if (res.ok) {
+                        return res.json();
+                    }
+                })
+                .then(res => {
+                    alert(`New book: ${JSON.stringify(res)} added successfully`);
+                    this.setState({ redirectToHome: true });
+                    // this.props.history.push("/home");
+                })
+        })
     }
 }
 

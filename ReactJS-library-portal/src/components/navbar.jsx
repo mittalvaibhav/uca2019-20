@@ -6,7 +6,7 @@ const Navbar = (props) => {
     return (
         <div className="row">
             <div className="col">
-                <nav className="navbar navbar-expand-lg navbar-light bg-light">
+                <nav className="navbar navbar-expand-lg navbar-dark bg-dark">
                     <div className="navbar-brand">
                         <Link to='/'>Home</Link>
                     </div>
@@ -14,7 +14,7 @@ const Navbar = (props) => {
                         <Link to='/add'>Add Book</Link>
                     </div>
 
-                    <div className="navbar-text ml-5 pl-5" style={{ backgroundColor: "white" }}>
+                    <div className="navbar-text ml-5 pl-5" style={{ backgroundColor: "none" }}>
                         <i>Welcome to {props.name} library</i>
                     </div>
                 </nav>
