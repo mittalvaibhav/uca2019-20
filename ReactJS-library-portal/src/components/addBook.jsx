@@ -70,7 +70,7 @@ class AddBook extends Component {
         so the setState is Asynchronous */
         this.setState({ book: { ...this.state.book, name: this.name } })
         setTimeout(() => {
-            fetch('http://localhost:3000/bookList', {
+            fetch('http://localhost:8080/addBook', {
                 method: "POST",
                 headers: {
                     "Content-Type": "application/json",
