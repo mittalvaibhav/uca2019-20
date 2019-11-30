@@ -1,6 +1,9 @@
 const express = require("express");
 const bodyParser = require("body-parser");
+require('./dbConnection');
 var app = express();
+var users = require('./routes/users');
+
 var id = 1;
 var books = [
     {
@@ -21,6 +24,8 @@ app.use("*", (req, res, next) => {
     res.setHeader("Access-Control-Allow-Methods", "*")
     next();
 })
+
+app.use('/users', users);
 
 app.get("/", function (req, res) {
     res.send("Library portal");
