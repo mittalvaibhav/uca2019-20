@@ -3,8 +3,9 @@ const bodyParser = require("body-parser");
 require('./dbConnection');
 var app = express();
 var users = require('./routes/users');
+var books = require('./routes/books');
 
-var id = 1;
+/* var id = 1;
 var books = [
     {
         "id": id,
@@ -12,7 +13,7 @@ var books = [
         "author": "A2UP",
         "version": "1.4"
     }
-]
+] */
 
 app.use(bodyParser.json());
 
@@ -26,12 +27,13 @@ app.use("*", (req, res, next) => {
 })
 
 app.use('/users', users);
+app.use('/books', books);
 
 app.get("/", function (req, res) {
     res.send("Library portal");
 })
 
-app.get("/bookList", (req, res) => {
+/* app.get("/bookList", (req, res) => {
     res.send(books)
 })
 
@@ -54,7 +56,7 @@ app.delete('/deleteBook/:id', (req, res) => {
     })
     books = newBookList;
     res.send(`Id ${bookId} deleted successfully`);
-})
+}) */
 
 app.listen(8080, () => {
     console.log("Server is listening at port 8080")

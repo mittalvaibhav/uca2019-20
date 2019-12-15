@@ -49,7 +49,7 @@ class MainPage extends Component {
     }
 
     fetchBooksList = () => {
-        fetch('http://localhost:8080/bookList')
+        fetch('http://localhost:8080/books')
             .then(res => {
                 return res.json()
             })
@@ -77,7 +77,7 @@ class MainPage extends Component {
         // }, 0)
 
         console.log('Updating book')
-        fetch(`http://localhost:3000/bookList/${book.id}`, {
+        fetch(`http://localhost:8080/books/updateBook`, {
             method: "PUT",
             headers: {
                 "Content-Type": "application/json"
@@ -100,7 +100,7 @@ class MainPage extends Component {
         console.log(`Book to be delete is: ${JSON.stringify(book)}`)
         console.log(this);
 
-        fetch(`http://localhost:8080/deleteBook/${book.id}`, {
+        fetch(`http://localhost:8080/books/deleteBook?id=${book._id}`, {
             method: "DELETE",
             headers: {
                 "Content-Type": "application/json"

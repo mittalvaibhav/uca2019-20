@@ -34,7 +34,7 @@ class EditBook extends Component {
     editBook = (event) => {
         event.preventDefault();
         let book = {
-            id: this.props.book.id,
+            _id: this.props.book._id,
             name: this.refs.name.value,
             author: this.refs.author.value,
             version: this.refs.version.value,
