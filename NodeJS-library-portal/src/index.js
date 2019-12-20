@@ -1,9 +1,12 @@
+// All import statements
 const express = require("express");
 const bodyParser = require("body-parser");
 require('./dbConnection');
-var app = express();
 var users = require('./routes/users');
 var books = require('./routes/books');
+
+// Functional code start here
+var app = express();
 
 /* var id = 1;
 var books = [
@@ -16,7 +19,7 @@ var books = [
 ] */
 
 app.use(bodyParser.json());
-
+app.use("/", express.static('public'))
 // Sample middleware
 app.use("*", (req, res, next) => {
     console.log("Middleware is called");

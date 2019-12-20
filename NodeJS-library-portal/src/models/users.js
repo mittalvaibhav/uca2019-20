@@ -6,7 +6,7 @@ const usersSchema = new mongoose.Schema({
     isEnabled: Boolean
 })
 
-const UsersModel = mongoose.model("Users", usersSchema);
+const UsersModel = mongoose.model("Users", usersSchema, "users");
 
 UsersModel.findUsers = function (req, callBack) {
     let id = req.query.id;
