@@ -8,6 +8,8 @@
 # DB files
 /Database
 
+# build files
+
 # testing
 **/coverage
 
