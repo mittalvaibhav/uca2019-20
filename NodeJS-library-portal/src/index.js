@@ -4,9 +4,26 @@ const bodyParser = require("body-parser");
 require('./dbConnection');
 var users = require('./routes/users');
 var books = require('./routes/books');
+const UsersModel = require('./models/users');
+const session = require('express-session');
 
 // Functional code start here
 var app = express();
+var cookieValidator = (req, res, next) => {
+    if (req.session.userName) {
+        UsersModel.findUser(req, (err, res) => {
+            if (err) res.status(401).send("User not authenticated");
+            if (res && res.length == 0) {
+                res.status(401).send("User not authenticated");
+            }
+            if (res && res.length > 0) {
+                next();
+            }
+        })
+    } else {
+        res.status(401).send("User not authenticated");
+    }
+}
 
 /* var id = 1;
 var books = [
@@ -19,8 +36,14 @@ var books = [
 ] */
 
 app.use(bodyParser.json());
-app.use("/", express.static('public'))
-// Sample middleware
+app.use(session({
+    key: "library",
+    secret: "librarysecret"
+}))
+app.use("/", express.static('static'))
+app.use("/home", express.static('static'))
+
+// Middleware
 app.use("*", (req, res, next) => {
     console.log("Middleware is called");
     res.setHeader('Access-Control-Allow-Origin', "*")
@@ -30,7 +53,7 @@ app.use("*", (req, res, next) => {
 })
 
 app.use('/users', users);
-app.use('/books', books);
+app.use('/books', cookieValidator, books);
 
 app.get("/", function (req, res) {
     res.send("Library portal");
@@ -60,6 +83,8 @@ app.delete('/deleteBook/:id', (req, res) => {
     books = newBookList;
     res.send(`Id ${bookId} deleted successfully`);
 }) */
+
+
 
 app.listen(8080, () => {
     console.log("Server is listening at port 8080")

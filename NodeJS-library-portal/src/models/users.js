@@ -1,23 +1,33 @@
 const mongoose = require('mongoose');
 
 const usersSchema = new mongoose.Schema({
+    userName: {
+        type: String,
+        unique: true,
+        required: true
+    },
+    password: {
+        type: String,
+        required: true
+    },
     name: String,
     age: Number,
     isEnabled: Boolean
 })
 
-const UsersModel = mongoose.model("Users", usersSchema, "users");
+const UsersModel = mongoose.model("Users", usersSchema, "userss");
 
-UsersModel.findUsers = function (req, callBack) {
-    let id = req.query.id;
-    let query = {};
-    if (id) {
-        query = { _id: id }
-    }
-    UsersModel.find(query, callBack);
+UsersModel.findUser = function (req, callBack) {
+
+    UsersModel.find({ userName: req.session.userName }, callBack);
 }
 
-UsersModel.addUsers = function (req, callBack) {
+UsersModel.findUserForLogin = function (req, callBack) {
+    let user = { userName: req.body.userName, password: req.body.password };
+    UsersModel.find(user, callBack);
+}
+
+UsersModel.addUser = function (req, callBack) {
     let user = req.body;
     UsersModel.create(user, callBack);
 }

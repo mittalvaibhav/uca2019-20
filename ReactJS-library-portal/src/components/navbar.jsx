@@ -8,16 +8,16 @@ const Navbar = (props) => {
             <div className="col">
                 <nav className="navbar navbar-expand-lg navbar-light bg-light">
                     <div className="navbar-brand">
-                        <Link to='/'>Home</Link>
+                        <Link to='/home'>Home</Link>
                     </div>
                     <div className="navbar-item mr-4">
                         <Link to='/add'>Add Book</Link>
                     </div>
-                    <div className="navbar-item mr-4" hidden={props.authenticated}>
-                        <Link to='/protected'>Login</Link>
+                    <div className="navbar-item m-4">
+                        <Link to='/login'>Login</Link>
                     </div>
-                    <div className="navbar-text ml-5 pl-5" style={{ backgroundColor: "white" }}>
-                        <i>Welcome to {props.name} library</i>
+                    <div className="navbar-item m-4">
+                        <Link to='/signup'>Signup</Link>
                     </div>
                 </nav>
             </div>
