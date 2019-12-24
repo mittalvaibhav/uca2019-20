@@ -9,6 +9,7 @@
 /Database
 
 # build files
+/**/static
 
 # testing
 **/coverage
