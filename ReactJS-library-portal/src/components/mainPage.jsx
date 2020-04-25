@@ -11,7 +11,10 @@ import Protected from './Protected';
 import UnProtected from './UnProtected';
 import SignUp from './SignUp';
 import Login from './Login';
-
+import { connect } from 'react-redux';
+import "./../index.css";
+import { setBooksCount } from "./../redux/actions";
+import RecentBooksListComponentWithStore from './RecentBooksListComponentWithStore';
 
 class MainPage extends Component {
     constructor() {
@@ -38,7 +41,8 @@ class MainPage extends Component {
                     <Navbar name={this.name} authenticated={this.state.authenticated} />
                     <div className="col-md-8 offset-md-2">
                         <Switch>
-                            <Route exact path="/home" render={(props) => <RecentBooksList bookList={this.state.bookList} sendSelectedBook={this.selectBook} deleteBook={this.deleteBook} fetchBooksList={this.fetchBooksList} />} />
+                            <Route exact path="/home" render={(props) => <RecentBooksListComponentWithStore />} />
+                            {/* <Route exact path="/home" render={(props) => <RecentBooksList bookList={this.state.bookList} sendSelectedBook={this.selectBook} deleteBook={this.deleteBook} fetchBooksList={this.fetchBooksList} />} /> */}
                             <Route path="/add" render={(props) => <AddBook {...props} test="test" />} />
                             <Route path="/edit" render={(props) => <EditBook book={this.state.selectedBookForEdit} editBook={this.editBook} />} />
                             <Route path="/protected" render={(props) => this.state.authenticated ? <Protected /> : <Redirect to='/' />} />
@@ -51,21 +55,6 @@ class MainPage extends Component {
                 </Router>
             </div>
         )
-    }
-
-    fetchBooksList = () => {
-        fetch('http://localhost:8080/books')
-            .then(res => {
-                return res.json()
-            })
-            .then(res => {
-                console.log(res);
-                this.setState({ bookList: res });
-                console.log(this.state.bookList)
-            })
-            .catch(res => {
-                console.log(`The error is : ${JSON.stringify(res)}`)
-            })
     }
 
     selectBook = (book) => {
