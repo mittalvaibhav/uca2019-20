@@ -14,6 +14,10 @@ class RecentBookListComponentWithStore extends Component {
         this.props.setBooksList();
     }
     
+    componentDidUpdate() {
+        console.log("Recent Books List component updated");
+    }
+    
     render() {
         console.log(`The input props are: ${JSON.stringify(this.props)}`)
         return (

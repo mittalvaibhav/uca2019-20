@@ -15,6 +15,7 @@ import { connect } from 'react-redux';
 import "./../index.css";
 import { setBooksCount } from "./../redux/actions";
 import RecentBooksListComponentWithStore from './RecentBooksListComponentWithStore';
+import AddBookComponentWithStore from './AddBookComponentWithStore';
 
 class MainPage extends Component {
     constructor() {
@@ -43,7 +44,8 @@ class MainPage extends Component {
                         <Switch>
                             <Route exact path="/home" render={(props) => <RecentBooksListComponentWithStore />} />
                             {/* <Route exact path="/home" render={(props) => <RecentBooksList bookList={this.state.bookList} sendSelectedBook={this.selectBook} deleteBook={this.deleteBook} fetchBooksList={this.fetchBooksList} />} /> */}
-                            <Route path="/add" render={(props) => <AddBook {...props} test="test" />} />
+                            {/* <Route path="/add" render={(props) => <AddBook {...props} test="test" />} /> */}
+                            <Route path="/add" render={(props) => <AddBookComponentWithStore {...props} test="test" />} />
                             <Route path="/edit" render={(props) => <EditBook book={this.state.selectedBookForEdit} editBook={this.editBook} />} />
                             <Route path="/protected" render={(props) => this.state.authenticated ? <Protected /> : <Redirect to='/' />} />
                             <Route path="/signup" render={(props) => <SignUp />} />
