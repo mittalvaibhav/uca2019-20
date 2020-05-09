@@ -42,7 +42,7 @@ class AddBookComponentWithStore extends Component {
 
         return (
             <div className="container">
-                <p>The book name is {this.props.selectedBookName}</p>
+                <p>The selected book name is {this.props.selectedBookName}</p>
                 <form onSubmit={this.addBook}>
                     <div className="form-row">
                         <div className="form-group col-md-8">

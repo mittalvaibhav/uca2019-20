@@ -1,16 +1,16 @@
-import { SET_RECENTS_BOOKS_LIST, SET_BOOKS_COUNT } from './actionTypes';
+import { SET_SELECTED_BOOK_NAME, SET_BOOKS_LIST } from './actionTypes';
 
 const initialState = {
     bookList: [],
-    count: 0
+    selectedBookName: ""
 }
 
 export function booksReducer(state = initialState, action) {
     switch (action.type) {
-        case SET_RECENTS_BOOKS_LIST:
-            return Object.assign({}, initialState, { bookList: action.bookList })
-        case SET_BOOKS_COUNT:
-            return Object.assign({}, initialState, { count: action.count })
+        case SET_SELECTED_BOOK_NAME:
+            return Object.assign({}, state, { selectedBookName: action.selectedBookName })
+        case SET_BOOKS_LIST:
+             return Object.assign({}, state, {booksList: action.booksList})
         default:
             return state
     }

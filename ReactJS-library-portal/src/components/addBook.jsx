@@ -1,6 +1,7 @@
 import React, { Component } from 'react';
 import { Redirect } from 'react-router-dom'
 import './../index.css';
+import { connect } from 'react-redux';
 
 class AddBook extends Component {
     constructor(props) {
@@ -38,6 +39,7 @@ class AddBook extends Component {
 
         return (
             <div className="container">
+                <p>The selected book name is {this.props.selectedBookName}</p>
                 <form onSubmit={this.addBook}>
                     <div className="form-row">
                         <div className="form-group col-md-8">
@@ -91,4 +93,10 @@ class AddBook extends Component {
     }
 }
 
-export default AddBook;
+function mapStateToProps(state) {
+    return {
+        selectedBookName: state.selectedBookName,
+    } 
+}
+
+export default connect(mapStateToProps)(AddBook);

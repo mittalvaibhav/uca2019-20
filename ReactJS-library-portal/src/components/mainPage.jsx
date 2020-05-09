@@ -1,8 +1,8 @@
 import React, { Component } from 'react';
 import Navbar from './navbar';
-import RecentBooksList from './recentBooksList'
+import RecentBooksListWithReduxStore from './recentBooksList'
 import EditBook from './editBook';
-import AddBook from './addBook';
+import AddBookWithReduxStore from './addBook';
 import NotFound from './notFound';
 import { BrowserRouter as Router, Route, Switch, Redirect } from 'react-router-dom';
 import "./../index.css";
@@ -42,10 +42,10 @@ class MainPage extends Component {
                     <Navbar name={this.name} authenticated={this.state.authenticated} />
                     <div className="col-md-8 offset-md-2">
                         <Switch>
-                            <Route exact path="/home" render={(props) => <RecentBooksListComponentWithStore />} />
+                            <Route exact path="/home" render={(props) => <RecentBooksListWithReduxStore />} />
+                            {/* <Route exact path="/home" render={(props) => <RecentBooksListComponentWithStore />} /> */}
                             {/* <Route exact path="/home" render={(props) => <RecentBooksList bookList={this.state.bookList} sendSelectedBook={this.selectBook} deleteBook={this.deleteBook} fetchBooksList={this.fetchBooksList} />} /> */}
-                            {/* <Route path="/add" render={(props) => <AddBook {...props} test="test" />} /> */}
-                            <Route path="/add" render={(props) => <AddBookComponentWithStore {...props} test="test" />} />
+                            <Route path="/add" render={(props) => <AddBookWithReduxStore />} />
                             <Route path="/edit" render={(props) => <EditBook book={this.state.selectedBookForEdit} editBook={this.editBook} />} />
                             <Route path="/protected" render={(props) => this.state.authenticated ? <Protected /> : <Redirect to='/' />} />
                             <Route path="/signup" render={(props) => <SignUp />} />

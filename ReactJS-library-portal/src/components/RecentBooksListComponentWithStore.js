@@ -10,14 +10,14 @@ class RecentBookListComponentWithStore extends Component {
     }
 
     componentDidMount() {
-        this.props.setBookName("Book2");
+        this.props.setBookName();
         this.props.setBooksList();
     }
     
     componentDidUpdate() {
         console.log("Recent Books List component updated");
     }
-    
+
     render() {
         console.log(`The input props are: ${JSON.stringify(this.props)}`)
         return (
@@ -56,7 +56,7 @@ function mapStateToProps(state) {
 
 function mapDispatchToProps(dispatchNewState) {
     return {
-        setBookName: (selectedBookName) => { 
+        setBookName: () => { 
             // Add some api calling logic here and fetch the bookList 
             let bookNameFromServer = "Book3";
             dispatchNewState({selectedBookName: bookNameFromServer})
