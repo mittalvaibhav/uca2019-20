@@ -42,7 +42,7 @@ class RecentBooksList extends Component {
                         </thead>
                         <tbody>
                             {
-                                this.props.bookList ? this.props.bookList.map(book =>
+                                this.props.booksList ? this.props.booksList.map(book =>
                                     <tr key={book.id}>
                                         <td>{book.name}</td>
                                         <td>{book.author}</td>
