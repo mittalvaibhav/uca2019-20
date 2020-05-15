@@ -3,7 +3,7 @@ import 'bootstrap/dist/css/bootstrap.css';
 import { Link } from 'react-router-dom';
 import "./../index.css";
 import { connect } from 'react-redux';
-import { setBookName, setBooksList } from './../redux/actions';
+import { setBookName, setBooksList, fetchBooksList } from './../redux/actions';
 
 class RecentBooksList extends Component {
 
@@ -68,8 +68,8 @@ class RecentBooksList extends Component {
 
 function mapStateToProps(state) {
     return {
-        selectedBookName: state.selectedBookName,
-        booksList: state.booksList
+        selectedBookName: state.booksReducer.selectedBookName,
+        booksList: state.booksReducer.booksList
     } 
 }
 
@@ -81,17 +81,18 @@ function mapDispatchToProps(dispatchNewState) {
             dispatchNewState(setBookName(bookNameFromServer))
         },
         setBooksList: () => {
-            fetch('http://localhost:8080/books')
-                .then(res => {
-                    return res.json()
-                })
-                .then(res => {
-                    console.log(res);
-                    dispatchNewState(setBooksList(res))
-                })
-                .catch(res => {
-                    console.log(`The error is : ${JSON.stringify(res)}`)
-                })
+            dispatchNewState(fetchBooksList())
+            // fetch('http://localhost:8080/books')
+            //     .then(res => {
+            //         return res.json()
+            //     })
+            //     .then(res => {
+            //         console.log(res);
+            //         dispatchNewState(setBooksList(res))
+            //     })
+            //     .catch(res => {
+            //         console.log(`The error is : ${JSON.stringify(res)}`)
+            //     })
         }
     }
 }
