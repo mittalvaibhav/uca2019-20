@@ -1,11 +1,11 @@
 import { SET_SELECTED_BOOK_NAME, SET_BOOKS_LIST, SET_LIBRARY_NAME } from './actionTypes';
 
-const initialStateBook = {
+const initialStateBooks = {
     bookList: [],
     selectedBookName: ""
 }
 
-export function booksReducer(state = initialStateBook, action) {
+export function booksReducer(state = initialStateBooks, action) {
     switch (action.type) {
         case SET_SELECTED_BOOK_NAME:
             return Object.assign({}, state, { selectedBookName: action.selectedBookName })
@@ -19,6 +19,7 @@ export function booksReducer(state = initialStateBook, action) {
 const initialStateLibrary = {
     libraryName: ""
 }
+
 export function libraryReducer(state = initialStateLibrary, action) {
     switch (action.type) {
         case SET_LIBRARY_NAME:

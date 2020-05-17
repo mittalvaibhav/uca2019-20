@@ -3,7 +3,7 @@ import 'bootstrap/dist/css/bootstrap.css';
 import { Link } from 'react-router-dom';
 import "./../index.css";
 import { connect } from 'react-redux';
-import { setBookName, setBooksList, fetchBooksList } from './../redux/actions';
+import { setBookName, fetchBooksList } from './../redux/actions';
 
 class RecentBooksList extends Component {
 
@@ -27,7 +27,6 @@ class RecentBooksList extends Component {
     }
 
     render() {
-        console.log(`Recent Books render method is called`);
         return (
             <div className="row component-margin">
                 <div className="col">
@@ -43,7 +42,7 @@ class RecentBooksList extends Component {
                         <tbody>
                             {
                                 this.props.booksList ? this.props.booksList.map(book =>
-                                    <tr key={book.id}>
+                                    <tr key={book._id}>
                                         <td>{book.name}</td>
                                         <td>{book.author}</td>
                                         <td>{book.version}</td>
@@ -52,7 +51,7 @@ class RecentBooksList extends Component {
                                             <button className="btn btn-outline-dark ml-2" onClick={() => this.props.deleteBook(book)}>Delete</button>
                                         </td>
                                     </tr>
-                                ) : ``
+                                ) : null
                             }
                         </tbody>
                     </table>
@@ -73,26 +72,15 @@ function mapStateToProps(state) {
     } 
 }
 
-function mapDispatchToProps(dispatchNewState) {
+function mapDispatchToProps(dispatch) {
     return {
         setBookName: () => { 
             // Add some api calling logic here and fetch the bookList 
             let bookNameFromServer = "Book3";
-            dispatchNewState(setBookName(bookNameFromServer))
+            dispatch(setBookName(bookNameFromServer))
         },
         setBooksList: () => {
-            dispatchNewState(fetchBooksList())
-            // fetch('http://localhost:8080/books')
-            //     .then(res => {
-            //         return res.json()
-            //     })
-            //     .then(res => {
-            //         console.log(res);
-            //         dispatchNewState(setBooksList(res))
-            //     })
-            //     .catch(res => {
-            //         console.log(`The error is : ${JSON.stringify(res)}`)
-            //     })
+            dispatch(fetchBooksList())
         }
     }
 }

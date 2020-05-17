@@ -22,6 +22,7 @@ export function fetchBooksList() {
                 })
     }
 }
+
 export const setBooksList = (booksList) => {
     return {
         type: SET_BOOKS_LIST,

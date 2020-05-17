@@ -95,7 +95,7 @@ class AddBook extends Component {
 
 function mapStateToProps(state) {
     return {
-        selectedBookName: state.selectedBookName,
+        selectedBookName: state.booksReducer.selectedBookName,
     } 
 }
 
