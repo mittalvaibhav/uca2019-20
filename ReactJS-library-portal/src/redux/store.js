@@ -1,8 +1,20 @@
-import { createStore, applyMiddleware, combineReducers } from 'redux';
-import { booksReducer, libraryReducer } from './reducers';
-import thunk from 'redux-thunk';
-import { logger } from './logger';
+import { createStore, applyMiddleware, combineReducers } from "redux";
+import { booksReducer, libraryReducer } from "./reducers";
+import thunk from "redux-thunk";
+import { logger } from "./logger";
+import createSagaMiddleware from "redux-saga";
+import { put, takeEvery } from "redux-saga/effects";
+import { helloSaga } from "./../sagas/sagas";
 
-var finalReducer = combineReducers({booksReducer, libraryReducer})
+var finalReducer = combineReducers({ booksReducer, libraryReducer });
 
-export const store = createStore(finalReducer, applyMiddleware(thunk, logger))
+var sagaMiddleWare = createSagaMiddleware();
+
+export const store = createStore(
+  finalReducer,
+  applyMiddleware(thunk, logger, sagaMiddleWare)
+);
+
+sagaMiddleWare.run(helloSaga);
+
+const action = (type) => store.dispatch({ type });

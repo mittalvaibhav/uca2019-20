@@ -33,10 +33,10 @@ router.post('/login', (req, res) => {
             res.send(error);
         }
         if (response) {
-            if (response.length > 1) {
-                req.session.userName = response.userName
+            if (response.length > 0) {
+                req.session.userName = response[0].userName
                 console.log("Success response is: ", JSON.stringify(response));
-                res.send('User authenticated successfully');
+                res.send({ message: "User authenticated successfully" });
             } else {
                 res.status(401).send('User not authenticated');
             }

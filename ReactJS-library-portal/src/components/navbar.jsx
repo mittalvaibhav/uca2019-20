@@ -19,6 +19,9 @@ const Navbar = (props) => {
                     <div className="navbar-item m-4">
                         <Link to='/signup'>Signup</Link>
                     </div>
+                    <div className="navbar-item m-4">
+                        <Link to='/counter'>Counter</Link>
+                    </div>
                 </nav>
             </div>
         </div >

@@ -11,11 +11,10 @@ import Protected from './Protected';
 import UnProtected from './UnProtected';
 import SignUp from './SignUp';
 import Login from './Login';
-import { connect } from 'react-redux';
 import "./../index.css";
-import { setBooksCount } from "./../redux/actions";
 import RecentBooksListComponentWithStore from './RecentBooksListComponentWithStore';
 import AddBookComponentWithStore from './AddBookComponentWithStore';
+import Counter from './Counter';
 
 class MainPage extends Component {
     constructor() {
@@ -42,7 +41,7 @@ class MainPage extends Component {
                     <Navbar name={this.name} authenticated={this.state.authenticated} />
                     <div className="col-md-8 offset-md-2">
                         <Switch>
-                            <Route exact path="/home" render={(props) => <RecentBooksListWithReduxStore />} />
+                            <Route exact path="/home" render={(props) => <RecentBooksListWithReduxStore sendSelectedBook={this.selectBook}/>} />
                             {/* <Route exact path="/home" render={(props) => <RecentBooksListComponentWithStore />} /> */}
                             {/* <Route exact path="/home" render={(props) => <RecentBooksList bookList={this.state.bookList} sendSelectedBook={this.selectBook} deleteBook={this.deleteBook} fetchBooksList={this.fetchBooksList} />} /> */}
                             <Route path="/add" render={(props) => <AddBookWithReduxStore />} />
@@ -50,6 +49,7 @@ class MainPage extends Component {
                             <Route path="/protected" render={(props) => this.state.authenticated ? <Protected /> : <Redirect to='/' />} />
                             <Route path="/signup" render={(props) => <SignUp />} />
                             <Route path="/login" render={(props) => <Login />} />
+                            <Route path="/counter" render={(props) => <Counter />} />
                             <Route render={(props) => <NotFound />} />
                         </Switch>
                     </div>
